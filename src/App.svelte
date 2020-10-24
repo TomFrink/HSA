@@ -12,37 +12,50 @@
   .parent {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 0.5fr repeat(3, 1fr) 0.25fr;
+    grid-template-rows: 0.5fr 0.5fr 1fr 0.25fr;
+    grid-template-areas:
+      "head head"
+      "info info"
+      "input output"
+      "foot foot";
     grid-column-gap: 20px;
     grid-row-gap: 10px;
     text-align: center;
   }
-
+  @media only screen and (max-width: 700px) {
+    .parent {
+      grid-template-columns: 1fr;
+      grid-template-rows: 0.5fr 0.5fr 1fr 1fr 0.25fr;
+      grid-template-areas:
+        "head"
+        "info"
+        "input"
+        "output"
+        "foot";
+    }
+  }
   .head {
-    grid-area: 1 / 1 / 2 / 3;
+    grid-area: head;
   }
   .info {
-    grid-area: 2 / 1 / 3 / 3;
+    grid-area: info;
     background-color: var(--light-cyan);
   }
   .input {
-    grid-area: 3 / 1 / 5 / 2;
+    grid-area: input;
     background-color: var(--burnt-sienna);
     color: var(--blue);
     font-size: 24px;
   }
   .output {
-    grid-area: 3 / 2 / 5 / 3;
+    grid-area: output;
     background-color: var(--blue);
     color: var(--burnt-sienna);
     font-size: 24px;
   }
   .foot {
-    grid-area: 5 / 1 / 6 / 3;
+    grid-area: foot;
     color: var(--light-cyan);
-  }
-  .foot a:any-link {
-    color: var(--burnt-sienna);
   }
   /* font */
   @font-face {
@@ -55,7 +68,9 @@
     font-size: 64px;
     color: var(--pale-blue);
   }
-
+  .foot a:any-link {
+    color: var(--burnt-sienna);
+  }
   /* colors */
   * {
     --blue: #001f54;
@@ -199,13 +214,11 @@
   <!-- output -->
   <article class="output">
     <p>
-      <i>Age: </i>
       {#if overFiftyfive}
         You're 55 or older this year.
       {:else}You are under 55.{/if}
     </p>
     <p>
-      <i>Insurance Type: </i>
       {#if family}
         You have a Family Insurace Plan.
       {:else}You have a Single Insurance Plan.{/if}
@@ -227,7 +240,6 @@
 
   <!-- closing -->
   <footer class="foot">
-    Made By
-    <a href="https://github.com/TomFrink">Tom Frink</a>
+    <p>Made By <a href="https://github.com/TomFrink">Tom Frink</a></p>
   </footer>
 </main>
