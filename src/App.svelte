@@ -1,0 +1,233 @@
+<script>
+  let overFiftyfive = false;
+  let family = false;
+  let paychecks = 26;
+  let employerContribution = 0;
+  let employeeContribution = 0;
+  $: totalContribution = employerContribution + employeeContribution;
+</script>
+
+<style>
+  /* layout */
+  .parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 0.5fr repeat(3, 1fr) 0.25fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+    text-align: center;
+  }
+
+  .head {
+    grid-area: 1 / 1 / 2 / 3;
+  }
+  .info {
+    grid-area: 2 / 1 / 3 / 3;
+    background-color: var(--light-cyan);
+  }
+  .input {
+    grid-area: 3 / 1 / 5 / 2;
+    background-color: var(--burnt-sienna);
+    color: var(--blue);
+    font-size: 24px;
+  }
+  .output {
+    grid-area: 3 / 2 / 5 / 3;
+    background-color: var(--blue);
+    color: var(--burnt-sienna);
+    font-size: 24px;
+  }
+  .foot {
+    grid-area: 5 / 1 / 6 / 3;
+    color: var(--light-cyan);
+  }
+  .foot a:any-link {
+    color: var(--burnt-sienna);
+  }
+  /* font */
+  @font-face {
+    font-family: "Anton", sans-serif;
+    src: local("Anton"), local("Anton"),
+      url(https://fonts.googleapis.com/css2?family=Anton&display=swap);
+  }
+  h1 {
+    font-family: "Anton", sans-serif;
+    font-size: 64px;
+    color: var(--pale-blue);
+  }
+
+  /* colors */
+  * {
+    --blue: #001f54;
+    --pale-blue: #98c1d9ff;
+    --light-cyan: #e0fbfcff;
+    --burnt-sienna: #ee6c4dff;
+    --gunmetal: #293241ff;
+  }
+  main {
+    background: var(--gunmetal);
+  }
+</style>
+
+<main class="parent">
+  <header class="head">
+    <h1>2020 HSA Contribution Calculator</h1>
+  </header>
+
+  <!-- info -->
+  <article class="info">
+    <p>
+      According to
+      <a
+        href="https://www.healthcare.gov/high-deductible-health-		plan/hsa-eligible-hdhp/">
+        this HealthCare.Gov website</a>, There are annual limits for deposits
+      into an HSA.
+    </p>
+    <p>
+      These limits for 2020 are:
+      <br />
+      <strong>$3,550 for self-only HDHP coverage<br />
+        $7,100 for family HDHP coverage</strong>
+    </p>
+    <p>
+      Amounts are adjusted yearly for inflation.<br />
+      If you are age 55 or older at the end of your tax year, your contribution
+      limit is increased by $1,000.
+    </p>
+  </article>
+  <hr />
+
+  <!-- input -->
+  <article class="input">
+    <label>
+      <input type="checkbox" bind:checked={overFiftyfive} />
+      55 or older this year?
+    </label>
+
+    <label>
+      <input type="checkbox" bind:checked={family} />
+      Family Insurance?
+    </label>
+
+    <!-- <p>How frequently do you get paid?</p>
+    <label>
+      <input type="radio" bind:group={paychecks} value={52} />
+      Weekly
+    </label>
+
+    <label>
+      <input type="radio" bind:group={paychecks} value={26} />
+      Bi-weekly
+    </label>
+
+    <label>
+      <input type="radio" bind:group={paychecks} value={12} />
+      Monthly
+    </label> -->
+
+    <p>How much is your employer going to contribute this year?</p>
+    <label>
+      <input
+        type="number"
+        bind:value={employerContribution}
+        min="0"
+        max="2000" />
+      <input
+        type="range"
+        bind:value={employerContribution}
+        min="0"
+        max="2000" />
+    </label>
+
+    <p>How much are you going to contribute this year?</p>
+
+    {#if family && overFiftyfive}
+      <label>
+        <input
+          type="number"
+          bind:value={employeeContribution}
+          min="0"
+          max="8100" />
+        <input
+          type="range"
+          bind:value={employeeContribution}
+          min="0"
+          max="8100" />
+      </label>
+    {:else if family}
+      <label>
+        <input
+          type="number"
+          bind:value={employeeContribution}
+          min="0"
+          max="7100" />
+        <input
+          type="range"
+          bind:value={employeeContribution}
+          min="0"
+          max="7100" />
+      </label>
+    {:else if overFiftyfive}
+      <label>
+        <input
+          type="number"
+          bind:value={employeeContribution}
+          min="0"
+          max="4550" />
+        <input
+          type="range"
+          bind:value={employeeContribution}
+          min="0"
+          max="4550" />
+      </label>
+    {:else}
+      <label>
+        <input
+          type="number"
+          bind:value={employeeContribution}
+          min="0"
+          max="3550" />
+        <input
+          type="range"
+          bind:value={employeeContribution}
+          min="0"
+          max="3550" />
+      </label>
+    {/if}
+  </article>
+
+  <!-- output -->
+  <article class="output">
+    <p>
+      <i>Age: </i>
+      {#if overFiftyfive}
+        You're 55 or older this year.
+      {:else}You are under 55.{/if}
+    </p>
+    <p>
+      <i>Insurance Type: </i>
+      {#if family}
+        You have a Family Insurace Plan.
+      {:else}You have a Single Insurance Plan.{/if}
+    </p>
+
+    <h2>Total Annual Contribution of $ {totalContribution}</h2>
+
+    <p>
+      Weekly Contribution: $
+      {(employeeContribution / 52).toFixed(2)}
+      <br />
+      Bi-Weekly Contribution: $
+      {(employeeContribution / 26).toFixed(2)}
+      <br />
+      Monthly Contribution: $
+      {(employeeContribution / 12).toFixed(2)}
+    </p>
+  </article>
+
+  <!-- closing -->
+  <footer class="foot">
+    Made By
+    <a href="https://github.com/TomFrink">Tom Frink</a>
+  </footer>
+</main>
