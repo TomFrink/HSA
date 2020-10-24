@@ -86,28 +86,27 @@
 
 <main class="parent">
   <header class="head">
-    <h1>2020 HSA Contribution Calculator</h1>
+    <h1>2021 HSA Contribution Calculator</h1>
   </header>
 
   <!-- info -->
   <article class="info">
     <p>
+      There are Annual Contribution Limits for Health Savings Accounts (HSA),
       According to
-      <a
-        href="https://www.healthcare.gov/high-deductible-health-		plan/hsa-eligible-hdhp/">
-        this HealthCare.Gov website</a>, There are annual limits for deposits
-      into an HSA.
-    </p>
-    <p>
-      These limits for 2020 are:
+      <a href="https://www.irs.gov/pub/irs-drop/rp-20-32.pdf">
+        this IRS.gov website</a>.
       <br />
-      <strong>$3,550 for self-only HDHP coverage<br />
-        $7,100 for family HDHP coverage</strong>
+      These limits are adjusted yearly for inflation.
     </p>
     <p>
-      Amounts are adjusted yearly for inflation.<br />
-      If you are age 55 or older at the end of your tax year, your contribution
-      limit is increased by $1,000.
+      These limits for 2021 are:<br />
+      <strong>$3,600 for self-only HDHP coverage<br />
+        $7,200 for family HDHP coverage</strong>
+    </p>
+    <p>
+      If you are age 55 or older at the end of this tax year, your contribution
+      limit is increased by $1,000.<br />
     </p>
   </article>
   <hr />
@@ -162,12 +161,12 @@
           type="number"
           bind:value={employeeContribution}
           min="0"
-          max="8100" />
+          max="8200" />
         <input
           type="range"
           bind:value={employeeContribution}
           min="0"
-          max="8100" />
+          max="8200" />
       </label>
     {:else if family}
       <label>
@@ -175,12 +174,12 @@
           type="number"
           bind:value={employeeContribution}
           min="0"
-          max="7100" />
+          max="7200" />
         <input
           type="range"
           bind:value={employeeContribution}
           min="0"
-          max="7100" />
+          max="7200" />
       </label>
     {:else if overFiftyfive}
       <label>
@@ -188,12 +187,12 @@
           type="number"
           bind:value={employeeContribution}
           min="0"
-          max="4550" />
+          max="4600" />
         <input
           type="range"
           bind:value={employeeContribution}
           min="0"
-          max="4550" />
+          max="4600" />
       </label>
     {:else}
       <label>
@@ -201,12 +200,12 @@
           type="number"
           bind:value={employeeContribution}
           min="0"
-          max="3550" />
+          max="3600" />
         <input
           type="range"
           bind:value={employeeContribution}
           min="0"
-          max="3550" />
+          max="3600" />
       </label>
     {/if}
   </article>
