@@ -100,9 +100,9 @@
       These limits are adjusted yearly for inflation.
     </p>
     <p>
-      These limits for 2021 are:<br />
-      <strong>$3,600 for self-only HDHP coverage<br />
-        $7,200 for family HDHP coverage</strong>
+      These limits for 2023 are:<br />
+      <strong>$3,850 for self-only HDHP coverage<br />
+       $7,750 for family HDHP coverage</strong>
     </p>
     <p>
       If you are age 55 or older at the end of this tax year, your contribution
