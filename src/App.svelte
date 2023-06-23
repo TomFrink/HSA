@@ -92,12 +92,13 @@
   <!-- info -->
   <article class="info">
     <p>
-      There are Annual Contribution Limits for Health Savings Accounts (HSA),
+      There are Annual Contribution Limits for Health Savings Accounts (HSA).
+      <br />
       According to
       <a href="https://www.irs.gov/pub/irs-drop/rp-20-32.pdf">
         this IRS.gov website</a>.
       <br />
-      These limits are adjusted yearly for inflation.
+      These limits are adjusted annually for inflation.
     </p>
     <p>
       These limits for 2023 are:<br />
